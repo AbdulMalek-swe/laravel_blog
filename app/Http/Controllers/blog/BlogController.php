@@ -35,4 +35,32 @@ class BlogController extends Controller
         return  "succesfully image upload" .$th->getMessage() ;
        }
     }
+    // update blog 
+    public function update(Request $request,string $id)
+    {
+       try {
+        $result =  ProductService::updateBlog($request, $id);
+        return  response()->json([
+         "message"=>"successfully create blog ",
+         "result"=>$result
+        ],201);
+       } catch (\Throwable $th) {
+        //throw $th;
+        return  "succesfully image upload" .$th->getMessage() ;
+       }
+    }
+    // delete blog  
+    public function destroy( string $id)
+    {
+       try {
+        $result =  ProductService::deleteBlog($id);
+        return  response()->json([
+         "message"=>"successfully create blog ",
+         "result"=>$result
+        ],201);
+       } catch (\Throwable $th) {
+        //throw $th;
+        return  "succesfully image upload" .$th->getMessage() ;
+       }
+    }
 }

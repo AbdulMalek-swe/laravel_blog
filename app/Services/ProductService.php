@@ -17,8 +17,14 @@ class ProductService{
         return Blog::create($request->all());
     }
     //  update blog 
-    public static function updateBlog(){
-        
+    public static function updateBlog($request,$id){
+          $blog = ProductService::findById($id);
+          $blog->update(['title' => $request->title]);
         return "successfully update blog";
+    }
+    public static function deleteBlog( $id){
+          $blog = ProductService::findById($id); 
+          $blog->delete();
+        return "successfully delete blog";
     }
 }
