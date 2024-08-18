@@ -18,7 +18,10 @@ Route::get("/blog", [BlogController::class, "show"]);
 Route::get("/blog/{id}", [BlogController::class, "singleBlog"]);
 Route::patch("/blog/{id}", [BlogController::class, "update"]);
 Route::delete("/blog/{id}", [BlogController::class, "destroy"]);
-Route::post("/create/blog", [BlogController::class, "store"]);
+Route::group(['middleware' => ['jwt.auth']], function () {
+    Route::post("/create/blog", [BlogController::class, "store"]);
+});
+
  
 
    

@@ -22,6 +22,7 @@ class ProductService{
           $blog->update(['title' => $request->title]);
         return "successfully update blog";
     }
+    // delete product 
     public static function deleteBlog( $id){
           $blog = ProductService::findById($id); 
           $blog->delete();

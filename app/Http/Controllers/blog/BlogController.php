@@ -4,8 +4,10 @@ namespace App\Http\Controllers\blog;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use App\Models\User;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Stmt\TryCatch;
 
 class BlogController extends Controller
@@ -19,16 +21,19 @@ class BlogController extends Controller
     // find product using id 
     public function singleBlog(string $id){
            $blogContent =   ProductService::findById($id);
+         
            return response()->json($blogContent);
     }
     //   store blog in database 
     public function store(Request $request)
     {
        try {
+         $user = Auth::user();
         $result =  ProductService::storeBlog($request);
         return  response()->json([
          "message"=>"successfully create blog ",
-         "result"=>$result
+         "result"=>$result,
+         "user"=>$user
         ],201);
        } catch (\Throwable $th) {
         //throw $th;
