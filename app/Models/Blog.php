@@ -11,6 +11,15 @@ class Blog extends Model
     protected $fillable = [
         'title', 
         'content',
-        // Add this if you have an image field
+        'image',
+        'user_id'
     ];
+
+    /**
+     * Get the user that owns the blog post.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
